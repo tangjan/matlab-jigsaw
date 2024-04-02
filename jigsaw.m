@@ -1,100 +1,99 @@
-
 function jigsaw()
-%% Ö÷º¯Êı
-    Tag_A = Disrupt();%½«±ê¼Ç¾ØÕóµÄÅÅÁĞË³Ğò´òÂÒ
-    drawmap(Tag_A);%°´ÕÕ±ê¼Ç¾ØÕóÏÔÊ¾Æ´Í¼
-    tic
-    global Tag;%TagÊÇ±ê¼Ç¾ØÕó£¬¶¨Òå³ÉÈ«¾Ö±äÁ¿£¬·½±ã´«µİ²ÎÊı
-    Tag=Tag_A;
-    set(gcf,'windowButtonDownFcn', @ButtonDownFcn);%µã»÷Êó±êÊ±µ÷ÓÃButtonDownFcnº¯Êı
- 
-function ButtonDownFcn(src,event)
-%% »Øµ÷º¯Êı£¬Êó±êµã»÷ÊÂ¼ş·¢ÉúÊ±µ÷ÓÃ
-    pt=get(gca,'CurrentPoint');%»ñÈ¡µ±Ç°Êó±êµã»÷Î»ÖÃ×ø±ê
-    xpos=pt(1,1);%Êó±êµã»÷´¦µÄºá×ø±êÊµ¼ÊÖµ
-    ypos=pt(1,2);%Êó±êµã»÷´¦µÄ×İ×ø±êÊµ¼ÊÖµ
+% ä¸»å‡½æ•°
+Tag_A = Disrupt();  % å°†æ ‡è®°çŸ©é˜µçš„æ’åˆ—é¡ºåºæ‰“ä¹±
+drawmap(Tag_A);     % æŒ‰ç…§æ ‡è®°çŸ©é˜µæ˜¾ç¤ºæ‹¼å›¾
+tic;                % å¼€å§‹è®¡æ—¶
+global Tag;         % Tag æ˜¯æ ‡è®°çŸ©é˜µï¼Œå®šä¹‰æˆå…¨å±€å˜é‡ï¼Œæ–¹ä¾¿ä¼ é€’å‚æ•°
+Tag = Tag_A;
+set(gcf, 'windowButtonDownFcn', @ButtonDownFcn);    % ç‚¹å‡»é¼ æ ‡æ—¶è°ƒç”¨ ButtonDownFcn å‡½æ•°
 
-    col = ceil(xpos/100);%½«ºá×ø±êÖµ×ª»»ÎªÁĞÊı
-    row = ceil(ypos/100);%½«×İ×ø±êÖµ×ª»»ÎªĞĞÊı
+function ButtonDownFcn(~, ~)
+% å›è°ƒå‡½æ•°ï¼Œé¼ æ ‡ç‚¹å‡»äº‹ä»¶å‘ç”Ÿæ—¶è°ƒç”¨
+pt = get(gca, 'CurrentPoint');  % è·å–å½“å‰é¼ æ ‡ç‚¹å‡»ä½ç½®åæ ‡
+xpos = pt(1, 1);   % é¼ æ ‡ç‚¹å‡»å¤„çš„æ¨ªåæ ‡å®é™…å€¼
+ypos = pt(1, 2);   % é¼ æ ‡ç‚¹å‡»å¤„çš„çºµåæ ‡å®é™…å€¼
 
-    global Tag; %È«¾Ö±äÁ¿ÉùÃ÷
+col = ceil(xpos/60);   % å°†æ¨ªåæ ‡å€¼è½¬æ¢ä¸ºåˆ—æ•°
+row = ceil(ypos/60);   % å°†çºµåæ ‡å€¼è½¬æ¢ä¸ºè¡Œæ•°
 
-    if(col <= 3 && col >0)&&(row <= 3&&row > 0)%Êó±êµã»÷Î»ÖÃÔÚÓĞĞ§·¶Î§ÄÚ    
-        Tag=movejig(Tag,row,col);%°´µã»÷Î»ÖÃÒÆ¶¯Æ´Í¼
+global Tag; % å…¨å±€å˜é‡å£°æ˜
 
-        drawmap(Tag)%ÏÔÊ¾Æ´Í¼
-
-        order = [1 2 3;4 5 6;7 8 0];%Ë³Ğò¾ØÕó
-        zt = abs(Tag-order);%±È½ÏÁ½¸ö¾ØÕó
-        if sum(zt(:)) == 0 %Ë³ĞòÒÑ¾­ÍêÈ«ÎÇºÏ
-            image = imread('jigsawImage.jpeg');
-            imshow(image) %ÓÎÏ·Íê³É£¬²¹È«Æ´Í¼
-            tStr = toc
-            msg = ['¹§Ï²Íê³É! ÓÃÊ±', num2str(tStr), 'Ãë']
-            msgbox(msg) %ÌáÊ¾Íê³ÉĞÅÏ¢
-
-            pause(2);%ÑÓ³Ù2Ãë
-            close all %ÓÎÏ·½áÊø£¬¹Ø±ÕËùÓĞÍ¼Ïñ´°¿Ú
-        end
-
-    else
-        return
+if(col <= 5 && col >= 1)&&(row <= 5&&row >= 1)  % é¼ æ ‡ç‚¹å‡»ä½ç½®åœ¨æœ‰æ•ˆèŒƒå›´å†…
+    Tag = movejig(Tag, row, col);   % æŒ‰ç‚¹å‡»ä½ç½®ç§»åŠ¨æ‹¼å›¾
+    
+    drawmap(Tag)    % æ˜¾ç¤ºæ‹¼å›¾
+    
+    data = 1:25;
+    matrix_10x10 = reshape(data, 5, 5);
+    matrix_10x10(end, end) = 0;
+    order = matrix_10x10';  %Ë³åŸå§‹é¡ºåºçŸ©é˜µ
+    zt = abs(Tag - order);  % æ¯”è¾ƒä¸¤ä¸ªçŸ©é˜µ
+    if sum(zt(:)) == 0      %Ë³é¡ºåºå·²ç»å®Œå…¨å»åˆ
+        image = imread('jigsawImage.jpeg');
+        imshow(image) % æ¸¸æˆå®Œæˆï¼Œè¡¥å…¨æ‹¼å›¾
+        tStr = toc;   % ç»“æŸè®¡æ—¶
+        msg = ['æ­å–œå®Œæˆ! ç”¨æ—¶', num2str(tStr), 'ç§’'];
+        msgbox(msg)  % æç¤ºå®Œæˆä¿¡æ¯
+        
+        pause(2);    % å»¶è¿Ÿ 2 ç§’
+        close all    % æ¸¸æˆç»“æŸï¼Œå…³é—­æ‰€æœ‰å›¾åƒçª—å£
     end
- 
+    
+else
+    return
+end
+
 function tag = movejig(tag, row, col)
-%% 4¸öif·Ö4ÖÖÇé¿ö¶Ô²»Í¬Î»ÖÃ´¦µÄµã×ø±êÓë¾ØÕóĞĞÁĞÊ½Í³Ò»
-    num = tag(row,col);%Êó±êÎ»ÖÃÓëºÅÂëÅÆÒ»ÖÂ
-    if (row > 1)&&(tag(row-1,col)==0)%µã»÷Î»ÖÃÔÚµÚ¶ş»òµÚÈıĞĞ£¬¿Õ°×¿éÔÚµã»÷Î»ÖÃµÄÉÏÒ»ĞĞ
-        tag(row-1,col) = num;%½»»»Á½¸öÎ»ÖÃÉÏµÄÖµ
-        tag(row,col) = 0;
-    end
-    if (row < 3)&&(tag(row+1,col)==0)%µã»÷Î»ÖÃÔÚµÚÒ»»òµÚ¶şĞĞ£¬¿Õ°×¿éÔÚµã»÷Î»ÖÃµÄÏÂÒ»ĞĞ
-        tag(row+1,col) = num;
-        tag(row,col) = 0;
-    end
-    if (col > 1)&&(tag(row,col-1)==0)%µã»÷Î»ÖÃÔÚµÚ¶ş»òµÚÈıÁĞ£¬¿Õ°×¿éÔÚµã»÷Î»ÖÃµÄ×ó±ßÒ»ÁĞ
-        tag(row,col-1) = num;
-        tag(row,col) = 0;
-    end
-    if (col < 3)&&(tag(row,col+1)==0)%µã»÷Î»ÖÃÔÚµÚ¶ş»òµÚÈıÁĞ£¬¿Õ°×¿éÔÚµã»÷Î»ÖÃµÄÓÒ±ßÒ»ÁĞ
-        tag(row,col+1) = num;
-        tag(row,col) = 0;
-    end
- 
-function y = Disrupt()
-%% Ëæ»ú´òÂÒÔ­Æ´Í¼ÅÅÁĞË³Ğò
-    y =[1,2,3; 4,5,6; 7,8,0];
+% 4 ä¸ª if åˆ† 4 ç§æƒ…å†µå¯¹ä¸åŒä½ç½®å¤„çš„ç‚¹åæ ‡ä¸çŸ©é˜µè¡Œåˆ—å¼ç»Ÿä¸€
+num = tag(row, col);
+if (row > 1)&&(tag(row-1, col)==0)
+    tag(row-1,col) = num;
+    tag(row,col) = 0;
+end
+if (row < 5)&&(tag(row+1, col)==0)
+    tag(row+1,col) = num;
+    tag(row,col) = 0;
+end
+if (col > 1)&&(tag(row, col-1)==0)
+    tag(row,col-1) = num;
+    tag(row,col) = 0;
+end
+if (col < 5)&&(tag(row, col+1)==0)
+    tag(row,col+1) = num;
+    tag(row,col) = 0;
+end
 
-    for i = 1:400
-        row = randi([1,3]);%²úÉúÒ»¸ö·¶Î§ÔÚ1µ½3µÄÕûÊı
-        col = randi([1,3]);
-        y = movejig(y, row, col);%°´Ëæ»ú²úÉúµÄ¶¯×÷´òÂÒÆ´Í¼
-    end
- 
-function x = choose(image,index)
-%% ¸ù¾İË÷ÒıÑ¡Ôñ¶ÔÓ¦Î»ÖÃÉÏµÄÆ´Í¼¿é
-    if index > 0 %±ê¼ÇÎª1£¬2£¬3£¬4£¬5£¬6£¬7£¬8µÄÆ´Í¼¿é
-        % ¼ÆËã³öĞĞÊırowÒÔ¼°ÁĞÊıcolumn
-        row = fix((index - 1) / 3);
-        column = mod(index - 1, 3);
-        % ·Ö¸î³ö¶ÔÓ¦Æ´Í¼¿éÊı¾İ
-        x = image(1 + row * 100 : 100 * (row + 1), 1 + column * 100 : 100 * (column + 1), : );
-    else
-        x=uint8(255*ones(100,100,3));%Æ´Í¼¿é0¾ØÕóÊı¾İ
-    end
+function y = Disrupt()
+% éšæœºæ‰“ä¹±åŸæ‹¼å›¾æ’åˆ—é¡ºåº
+data = 1:25;
+matrix_10x10 = reshape(data, 5, 5);
+matrix_10x10(end, end) = 0;
+y = matrix_10x10';
+
+for i = 1:800
+    row = randi([1, 5]);
+    col = randi([1, 5]);
+    y = movejig(y, row, col);
+end
+
+function x = choose(image, index)
+% æ ¹æ®ç´¢å¼•é€‰æ‹©å¯¹åº”ä½ç½®ä¸Šçš„æ‹¼å›¾å—ï¼Œimage æ˜¯åŸå›¾çš„æ•°æ®çŸ©é˜µï¼Œindex æ˜¯è¦é€‰æ‹©çš„æ‹¼å›¾å—ç¼–å·
+if index > 0
+    row = fix((index - 1)/5);    % fix è¡¨ç¤ºå‘é›¶å–æ•´
+    column = mod(index - 1, 5);  %
+    x = image(1 + row * 60 : 60 * (row + 1), 1 + column * 60 : 60 * (column + 1), : );
+else
+    x = uint8(255*ones(60, 60, 3));
+end
 
 function drawmap(A)
-%% ½«ÔËËãÊı×ÖÓë¶ÔÓ¦Æ´Í¼¶ÔÓ¦ÏÔÊ¾Í¼Æ¬
-    origin=imread('jigsawImage.jpeg');
-    image=origin;
+origin = imread('jigsawImage.jpeg');
+image = origin;
 
-    % ¶ÔÒªÏÔÊ¾µÄÆ´Í¼½øĞĞ¸³Öµ
-    for row=1:3
-        for col=1:3
-        image(1 + (row - 1) * 100 : 100 * row, 1 + (col - 1) * 100 : 100 * col, : ) = choose(origin, A(row , col));
-        end
+for row = 1:5
+    for col = 1:5
+        image(1 + (row - 1) * 60 : 60 * row, 1 + (col - 1) * 60 : 60 * col, : ) = choose(origin, A(row , col));
     end
-    imshow(image)%ÏÔÊ¾Æ´Í¼
-
-    
+end
+imshow(image)
 

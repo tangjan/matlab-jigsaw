@@ -1,7 +1,14 @@
-## MATLAB拼图游戏制作
+## 基于 MATLAB 的拼图小游戏
 
-我使用是的MATLAB R2017b版本
+这是我大三上学期 MATLAB 专选课的的结课作业，就是用 MATLAB 做一个小项目出来。
 
-博客地址：http://www.tangjiayan.com
+基于 [基于MATLAB的拼图游戏设计](https://wuxian.blog.csdn.net/article/details/79219110)，改成了 5*5 的，并且增加了计时功能。
 
-参考自：https://wuxian.blog.csdn.net/article/details/79219110
+拼图素材用的是我的母校——矿大的校徽图片。
+
+MATLAB 版本：R2017b。
+
+虽然这个小项目距今已近四年了，也没什么可圈可点的地方，但这个项目算是我人生 ~~抄~~ 做成型的第一个项目，蛮有纪念意义的，并且也是挺有趣的一个项目，因此花点时间整理一下放在 GitHub 上。
+
+虽然就是拿大佬的项目左改改右改改，但当时还有幸拿到了全班最高分呢，嘿嘿。
+ο(=•ω＜=)ρ⌒☆
