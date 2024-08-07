@@ -29,7 +29,7 @@ if(col <= 5 && col >= 1)&&(row <= 5&&row >= 1)  % 鼠标点击位置在有效范
     order = matrix_10x10';  %˳原始顺序矩阵
     zt = abs(Tag - order);  % 比较两个矩阵
     if sum(zt(:)) == 0      %˳顺序已经完全吻合
-        image = imread('jigsawImage.jpeg');
+        image = imread('Naruse-Shiroha.png');
         imshow(image) % 游戏完成，补全拼图
         tStr = toc;   % 结束计时
         msg = ['恭喜完成! 用时', num2str(tStr), '秒'];
@@ -87,7 +87,7 @@ else
 end
 
 function drawmap(A)
-origin = imread('jigsawImage.jpeg');
+origin = imread('Naruse-Shiroha.png');
 image = origin;
 
 for row = 1:5
